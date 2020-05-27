@@ -5,8 +5,6 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 
-from . import views
-
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -14,7 +12,7 @@ urlpatterns = [
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += i18n_patterns(
-    path('', views.home, name='home'),
+    path('', include('matrevy.core.urls')),
     prefix_default_language=False
 )
 
