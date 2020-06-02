@@ -123,8 +123,10 @@ Built with
 ----------
 
 * Django_ - The web framework used
+* Bootstrap_ - CSS framework
 
 .. _Django: https://www.djangoproject.com/
+.. _Bootstrap: https://getbootstrap.com/
 
 License
 -------
