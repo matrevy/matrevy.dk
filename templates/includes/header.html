@@ -1,8 +1,13 @@
+{% load static %}
+
 <!-- BEGIN header -->
 <header>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-      <a class="navbar-brand" href="{% url 'home' %}">Matematikrevy</a>
+      <a class="navbar-brand" href="{% url 'home' %}">
+        <img src="{% static 'img/matrevy-logo.svg' %}" width="212" height="40" alt="Matematikrevy">
+      </a>
+
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
         <span class="navbar-toggler-icon"></span>
       </button>
