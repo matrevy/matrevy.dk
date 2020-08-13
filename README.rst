@@ -95,7 +95,11 @@ Database setup
 Usage
 ^^^^^
 
-10. Start development server ::
+10. Compile Sass to CSS ::
+
+        pysassc scss/main.scss static/css/main.css
+
+11. Start development server ::
 
         python manage.py runserver 0.0.0.0:8000
 

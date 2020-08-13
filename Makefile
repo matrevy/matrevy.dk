@@ -3,9 +3,14 @@
 .PHONY: help
 help:
 	@echo "Please use 'make <target>' where <target> is one of"
+	@echo "  css           - compile sass to css"
 	@echo "  help          - show this message"
 	@echo "  install       - install dependencies"
 	@echo "  run           - run development server"
+
+.PHONY: css
+css:
+	pysassc sass/main.scss static/css/main.css
 
 .PHONY: install
 install:

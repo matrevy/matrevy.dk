@@ -1,0 +1,20 @@
+// -----------------------------------------------------------------------------
+// This file contains very basic styles.
+// -----------------------------------------------------------------------------
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex-grow: 1;
+}
+
+a[rel~="external"]:after {
+  font-family: "FontAwesome";
+  font-size: 12px;
+  padding-left: 6px;
+  content: "\f08e";
+}
