@@ -18,13 +18,13 @@ local machine for development and testing purposes.
 Prerequisites
 ^^^^^^^^^^^^^
 
-* Python_ (>= 3.6)
-* PostgreSQL_ (>= 9.5)
+* Python_ (>= 3.9)
 * Git_
+* Docker_
 
 .. _Python: https://www.python.org/
-.. _PostgreSQL: https://www.postgresql.org/
 .. _Git: https://git-scm.com/
+.. _Docker: https://www.docker.com/
 
 Installation
 ^^^^^^^^^^^^

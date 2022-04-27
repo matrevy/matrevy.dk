@@ -1,10 +1,11 @@
 """Production settings for matrevy project."""
+
 from .base import *
 
 
-########
-# CORE #
-########
+###########
+# GENERAL #
+###########
 
 DEBUG = False
 

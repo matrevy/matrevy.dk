@@ -1,26 +1,21 @@
 """Base settings for matrevy project."""
-import json
+
 from pathlib import Path
+
+import environ
 
 _ = gettext = lambda s: s
 
 
 BASE_DIR = Path(__file__).resolve().parents[2]
 
-try:
-    with open(BASE_DIR / 'config' / 'secrets.json') as handle:
-        secrets = json.load(handle)
-except FileNotFoundError as exc:
-    raise FileNotFoundError(
-        "Secrets file not found. Make sure you have a file "
-        "called 'secrets.json' in the config directory."
-    ) from exc
+env = environ.Env()
 
-########
-# CORE #
-########
+###########
+# GENERAL #
+###########
 
-SECRET_KEY = secrets.get('SECRET_KEY', '')
+SECRET_KEY = env('DJANGO_SECRET_KEY')
 
 SITE_ID = 1
 
@@ -76,13 +71,15 @@ TEMPLATES = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': secrets.get('DB_NAME', ''),
-        'USER': secrets.get('DB_USER', ''),
-        'PASSWORD': secrets.get('DB_PASSWORD', ''),
-        'HOST': secrets.get('DB_HOST', ''),
-        'PORT': secrets.get('DB_PORT', ''),
+        'NAME': env('POSTGRES_NAME'),
+        'USER': env('POSTGRES_USER'),
+        'PASSWORD': env('POSTGRES_PASSWORD'),
+        'HOST': env('POSTGRES_HOST'),
+        'PORT': env('POSTGRES_PORT'),
     }
 }
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 ############
 # SECURITY #
@@ -144,7 +141,7 @@ MEDIA_URL = '/media/'
 # EMAIL #
 #########
 
-ADMINS = secrets.get('ADMINS', [])
+ADMINS = env.list('ADMINS', default=[])
 
 MANAGERS = ADMINS
 
@@ -154,19 +151,19 @@ SERVER_EMAIL = 'root@matrevy.dk'
 
 EMAIL_SUBJECT_PREFIX = '[Matematikrevy] '
 
-EMAIL_BACKEND = secrets.get(
-    'EMAIL_BACKEND', 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = env(
+    'EMAIL_BACKEND', default='django.core.mail.backends.console.EmailBackend'
 )
 
-EMAIL_HOST = secrets.get('EMAIL_HOST', 'localhost')
+EMAIL_HOST = env('EMAIL_HOST', default='localhost')
 
-EMAIL_PORT = secrets.get('EMAIL_PORT', 25)
+EMAIL_PORT = env.int('EMAIL_PORT', default=25)
 
-EMAIL_HOST_USER = secrets.get('EMAIL_HOST_USER', '')
+EMAIL_HOST_USER = env('EMAIL_HOST_USER', default='')
 
-EMAIL_HOST_PASSWORD = secrets.get('EMAIL_HOST_PASSWORD', '')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='')
 
-EMAIL_USE_TLS = secrets.get('EMAIL_USE_TLS', False)
+EMAIL_USE_TLS = env.bool('EMAIL_USE_TLS', default=False)
 
 ###########
 # LOGGING #
