@@ -10,8 +10,8 @@ from .base import *
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    'www.matrevy.dk',
     'matrevy.dk',
+    'www.matrevy.dk',
 ] + secrets.get('ALLOWED_HOSTS', [])
 
 ############
