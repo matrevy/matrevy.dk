@@ -1,14 +1,6 @@
-version: '3.8'
+version: "3.8"
 
 services:
-  db:
-    image: postgres:13
-    volumes:
-      - postgres_data:/var/lib/postgresql/data/
-    environment:
-      - POSTGRES_DB=matrevy_db
-      - POSTGRES_USER=matrevy
-      - POSTGRES_PASSWORD=postgres
   web:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
@@ -17,15 +9,28 @@ services:
     ports:
       - 8000:8000
     environment:
-      - DJANGO_SETTINGS_MODULE=config.settings.dev
+      - DJANGO_SETTINGS_MODULE=config.settings.development
       - DJANGO_SECRET_KEY=secret
-      - POSTGRES_NAME=matrevy_db
-      - POSTGRES_USER=matrevy
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_HOST=db
-      - POSTGRES_PORT=5432
+      - DATABASE_NAME=matrevy
+      - DATABASE_USER=matrevy
+      - DATABASE_PASSWORD=matrevy
+      - DATABASE_HOST=db
+      - DATABASE_PORT=5432
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:15
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=matrevy
+      - POSTGRES_USER=matrevy
+      - POSTGRES_PASSWORD=matrevy
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "matrevy", "-d", "matrevy"]
+      interval: 1s
 
 volumes:
   postgres_data:

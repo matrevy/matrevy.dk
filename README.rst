@@ -50,7 +50,7 @@ Installation
 
 4.  Install dependencies ::
 
-        pip install -r requirements/dev.txt
+        pip install -r requirements/development.txt
 
 5.  Create the file ``config/secrets.json`` with the following content
 

@@ -12,7 +12,7 @@ DEBUG = False
 ALLOWED_HOSTS = [
     'matrevy.dk',
     'www.matrevy.dk',
-] + secrets.get('ALLOWED_HOSTS', [])
+]
 
 ############
 # SECURITY #

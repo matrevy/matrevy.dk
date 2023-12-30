@@ -11,7 +11,7 @@ ENV PYTHONUNBUFFERED 1
 # Install dependencies
 RUN pip install --upgrade pip
 COPY ./requirements ./requirements
-RUN pip install -r ./requirements/dev.txt
+RUN pip install -r ./requirements/development.txt
 
 # Copy project
 COPY . .
