@@ -9,6 +9,7 @@ __pycache__/
 *.py[cod]
 
 # Environments
+.env
 env/
 venv/
 ENV/

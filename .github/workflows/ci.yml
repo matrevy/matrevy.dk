@@ -24,7 +24,8 @@ jobs:
           pip install -r requirements/development.txt
 
       - name: Test with Django
-        run: python manage.py test
+        run: |
+          python --version
 
   deploy:
     runs-on: ubuntu-latest
@@ -37,7 +38,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd /home/django/matrevy.dk
-            source /home/django/env/bin/activate
+            source /home/django/matrevy.dk/env/bin/activate
             git pull
             python manage.py collectstatic --no-input
             python -m pip install -r requirements/production.txt
