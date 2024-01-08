@@ -2,20 +2,18 @@
 
 from pathlib import Path
 
-import environ
+from decouple import config, Csv
 
 _ = gettext = lambda s: s
 
 
 BASE_DIR = Path(__file__).resolve().parents[2]
 
-env = environ.Env()
-
 ###########
 # GENERAL #
 ###########
 
-SECRET_KEY = env('DJANGO_SECRET_KEY')
+SECRET_KEY = config('DJANGO_SECRET_KEY')
 
 SITE_ID = 1
 
@@ -72,11 +70,11 @@ TEMPLATES = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env('POSTGRES_NAME'),
-        'USER': env('POSTGRES_USER'),
-        'PASSWORD': env('POSTGRES_PASSWORD'),
-        'HOST': env('POSTGRES_HOST'),
-        'PORT': env('POSTGRES_PORT'),
+        'NAME': config('POSTGRES_NAME'),
+        'USER': config('POSTGRES_USER'),
+        'PASSWORD': config('POSTGRES_PASSWORD'),
+        'HOST': config('POSTGRES_HOST'),
+        'PORT': config('POSTGRES_PORT'),
     }
 }
 
@@ -142,7 +140,7 @@ MEDIA_URL = '/media/'
 # EMAIL #
 #########
 
-ADMINS = env.list('ADMINS', default=[])
+ADMINS = config('ADMINS', default='', cast=Csv())
 
 MANAGERS = ADMINS
 
@@ -152,19 +150,19 @@ SERVER_EMAIL = 'root@matrevy.dk'
 
 EMAIL_SUBJECT_PREFIX = '[Matematikrevy] '
 
-EMAIL_BACKEND = env(
+EMAIL_BACKEND = config(
     'EMAIL_BACKEND', default='django.core.mail.backends.console.EmailBackend'
 )
 
-EMAIL_HOST = env('EMAIL_HOST', default='localhost')
+EMAIL_HOST = config('EMAIL_HOST', default='localhost')
 
-EMAIL_PORT = env.int('EMAIL_PORT', default=25)
+EMAIL_PORT = config('EMAIL_PORT', default=25, cast=int)
 
-EMAIL_HOST_USER = env('EMAIL_HOST_USER', default='')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
 
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
 
-EMAIL_USE_TLS = env.bool('EMAIL_USE_TLS', default=False)
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=False, cast=bool)
 
 ###########
 # LOGGING #
