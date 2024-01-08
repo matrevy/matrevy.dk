@@ -12,7 +12,7 @@ urlpatterns = [
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += i18n_patterns(
-    path('', include('matrevy.core.urls')),
+    path('', include('matrevy.common.urls')),
     prefix_default_language=False
 )
 
