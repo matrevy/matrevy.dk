@@ -1,5 +1,7 @@
 """Development settings for matrevy project."""
 
+import socket
+
 from .base import *
 
 
@@ -15,13 +17,15 @@ ALLOWED_HOSTS = ['*']
 # django-debug-toolbar #
 ########################
 
-INSTALLED_APPS += ['debug_toolbar']
+INSTALLED_APPS.append("debug_toolbar")
 
-MIDDLEWARE = ['debug_toolbar.middleware.DebugToolbarMiddleware'] + MIDDLEWARE
-
-INTERNAL_IPS = ['127.0.0.1']
-
-import socket
+MIDDLEWARE.insert(
+    MIDDLEWARE.index("django.middleware.common.CommonMiddleware") + 1,
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
+)
 
 _, _, ips = socket.gethostbyname_ex(socket.gethostname())
-INTERNAL_IPS += ['.'.join(ip.split('.')[:-1] + ['1']) for ip in ips]
+INTERNAL_IPS = [ip[:ip.rfind(".")] + ".1" for ip in ips] + [
+    "127.0.0.1",
+    "10.0.2.2",
+]

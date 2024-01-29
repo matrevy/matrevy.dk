@@ -11,6 +11,8 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
     'matrevy.dk',
+    'admin.matrevy.dk',
+    'backstage.matrevy.dk',
     'www.matrevy.dk',
 ]
 
