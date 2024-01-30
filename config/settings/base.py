@@ -32,6 +32,7 @@ INSTALLED_APPS = [
 
     'matrevy.accounts',
     'matrevy.common',
+    'matrevy.revues',
 ]
 
 MIDDLEWARE = [

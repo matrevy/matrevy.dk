@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Tidligere år | Matematikrevy{% endblock %}
+
+{% block content %}
+  <h2>Tidligere revyer</h2>
+  Test
+  <ul>
+  {% for revue in revues %}
+    <li><a href={{ revue.get_absolute_url }}>{{ revue.title }}</a></li>
+  {% endfor %}
+  </ul>
+{% endblock %}

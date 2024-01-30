@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ revue.title }} | Matematikrevy{% endblock %}
+
+{% block content %}
+  <h2>{{ revue.title }}</h2>
+  Test
+  {% if prev %}
+  <li class="prev">
+    <a rel="prev" href="{{ prev.get_absolute_url }}">{{ prev.title }}</a>
+  </li>
+  {% endif %}
+  {% if next %}
+  <li class="next">
+    <a rel="next" href="{{ next.get_absolute_url }}">{{ next.title }}</a>
+  </li>
+  {% endif %}
+{% endblock %}
