@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'matrevy.accounts',
     'matrevy.common',
 ]
 
@@ -85,6 +86,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 ############
 # SECURITY #
 ############
+
+AUTH_USER_MODEL = 'accounts.Account'
 
 SESSION_COOKIE_HTTPONLY = True
 
