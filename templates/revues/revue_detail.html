@@ -4,15 +4,30 @@
 
 {% block content %}
   <h2>{{ revue.title }}</h2>
-  Test
+
+  {% with scenes=revue.scene_set.all %}
+  <h3>Aktoversigt</h3>
+  {% regroup scenes by act_no as acts %}
+  <ul>
+  {% for act in acts %}
+      <li>Akt {{ act.grouper }}
+      <ul>
+      {% for scene in act.list %}
+        <li>{{ scene.title }}</li>
+      {% endfor %}
+      </ul>
+      </li>
+  {% endfor %}
+  {% endwith %}
+  </ul>
   {% if prev %}
   <li class="prev">
-    <a rel="prev" href="{{ prev.get_absolute_url }}">{{ prev.title }}</a>
+    <a rel="prev" href="{{ prev.get_absolute_url }}">Forrige</a>
   </li>
   {% endif %}
   {% if next %}
   <li class="next">
-    <a rel="next" href="{{ next.get_absolute_url }}">{{ next.title }}</a>
+    <a rel="next" href="{{ next.get_absolute_url }}">Næste</a>
   </li>
   {% endif %}
 {% endblock %}
